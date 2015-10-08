@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="contentApi">
+<html lang="en" data-ng-app="CopyshareContent">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,15 +20,16 @@
   <!-- endbuild -->
   <!-- Custom Scripts -->
   <script type="text/javascript" src="js/dashboard.min.js"></script>
+
 </head>
-<body ng-controller="MasterCtrl">
-  <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
+<body>
+  <div id="page-wrapper" data-ng-class="{'open': toggle}" data-ng-cloak>
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
       <ul class="sidebar">
         <li class="sidebar-main">
-          <a ng-click="toggleSidebar()">
+          <a href="#">
             Dashboard
             <span class="menu-icon glyphicon glyphicon-transfer"></span>
           </a>
@@ -128,7 +129,7 @@
         <!-- End Header Bar -->
 
         <!-- Main Content -->
-        <div ui-view></div>
+        <div data-ui-view></div>
 
       </div><!-- End Page Content -->
     </div><!-- End Content Wrapper -->
