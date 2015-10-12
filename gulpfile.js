@@ -8,7 +8,9 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     less = require('gulp-less'),
     rename = require('gulp-rename'),
-    minifyHTML = require('gulp-minify-html');
+    minifyHTML = require('gulp-minify-html'),
+    karma = require('karma').server,
+    protractor = require("gulp-protractor").protractor;
 
 var paths = {
     scripts: 'src/app/**/*.js',
@@ -76,7 +78,7 @@ gulp.task('custom-less', function() {
 /**
  * Watch custom files
  */
-gulp.task('watch', function() {
+gulp.task('watchResources', function() {
     gulp.watch([paths.images], ['custom-images']);
     gulp.watch([paths.styles], ['custom-less']);
     gulp.watch([paths.scripts], ['custom-js']);
@@ -97,7 +99,6 @@ gulp.task('webserver', function() {
 
 gulp.task('livereload', function() {
     gulp.src(['dist/**/*.*'])
-        .pipe(watch())
         .pipe(connect.reload());
 });
 
@@ -105,4 +106,21 @@ gulp.task('livereload', function() {
  * Gulp tasks
  */
 gulp.task('build', ['usemin', 'build-assets', 'build-custom']);
-gulp.task('default', ['build', 'webserver', 'livereload', 'watch']);
+gulp.task('default', ['build', 'webserver', 'livereload', 'watchResources']);
+
+gulp.task('unit', function (done) {
+  karma.start({
+    configFile: __dirname + '/tests/karma.conf.js',
+    singleRun: true
+  }, done);
+});
+
+gulp.task('e2e', function(done) {
+  var args = ['--baseUrl', 'http://127.0.0.1:8888'];
+  gulp.src(["./tests/**/*.js"])
+    .pipe(protractor({
+      configFile: "tests/protractor.conf.js",
+      args: args
+    }))
+    .on('error', function(e) { throw e; });
+});
