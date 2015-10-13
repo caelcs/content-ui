@@ -9,8 +9,9 @@ var gulp = require('gulp'),
     less = require('gulp-less'),
     rename = require('gulp-rename'),
     minifyHTML = require('gulp-minify-html'),
-    karma = require('karma').server,
+    Server = require('karma').Server,
     protractor = require("gulp-protractor").protractor;
+    karmaParseConfig = require('karma/lib/config').parseConfig;
 
 var paths = {
     scripts: 'src/app/**/*.js',
@@ -79,11 +80,11 @@ gulp.task('custom-less', function() {
  * Watch custom files
  */
 gulp.task('watchResources', function() {
-    gulp.watch([paths.images], ['custom-images']);
-    gulp.watch([paths.styles], ['custom-less']);
-    gulp.watch([paths.scripts], ['custom-js']);
+    gulp.watch(paths.images, ['custom-images']);
+    gulp.watch(paths.styles, ['custom-less']);
+    gulp.watch(paths.scripts, ['custom-js']);
     // gulp.watch([paths.templates], ['custom-templates']);
-    gulp.watch([paths.index], ['usemin']);
+    gulp.watch(paths.index, ['usemin']);
 });
 
 /**
@@ -108,11 +109,14 @@ gulp.task('livereload', function() {
 gulp.task('build', ['usemin', 'build-assets', 'build-custom']);
 gulp.task('default', ['build', 'webserver', 'livereload', 'watchResources']);
 
+/**
+ * Run test once and exit
+ */
 gulp.task('unit', function (done) {
-  karma.start({
+  new Server({
     configFile: __dirname + '/tests/karma.conf.js',
     singleRun: true
-  }, done);
+  }, done).start();
 });
 
 gulp.task('e2e', function(done) {
