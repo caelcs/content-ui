@@ -46,3 +46,6 @@ Icon
 
 # Bower components
 /src/assets/libs
+
+# test results
+test_out

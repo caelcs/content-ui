@@ -28,9 +28,12 @@ module.exports = function(config){
             'karma-junit-reporter'
             ],
 
+    reporters: ['junit'],
+
     junitReporter : {
-      outputFile: 'test_out/unit.xml',
-      suite: 'unit'
+      outputDir: '../test_out/xml',
+      outputFile: 'gretter.xml',
+      suite: 'greeter'
     }
 
   });
