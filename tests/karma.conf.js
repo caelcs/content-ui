@@ -14,15 +14,16 @@ module.exports = function(config){
     port : 8888,
 
     logLevel: config.LOG_INFO,
-    
+
     autoWatch : true,
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome'],
+    browsers : ['PhantomJS'],
 
     plugins : [
             'karma-chrome-launcher',
+            'karma-phantomjs-launcher',
             'karma-jasmine',
             'karma-junit-reporter'
             ],

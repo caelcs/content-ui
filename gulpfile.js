@@ -11,7 +11,6 @@ var gulp = require('gulp'),
     minifyHTML = require('gulp-minify-html'),
     Server = require('karma').Server,
     protractor = require("gulp-protractor").protractor;
-    karmaParseConfig = require('karma/lib/config').parseConfig;
 
 var paths = {
     scripts: 'src/app/**/*.js',
@@ -69,12 +68,6 @@ gulp.task('custom-less', function() {
         .pipe(less())
         .pipe(gulp.dest('dist/css'));
 });
-//
-// gulp.task('custom-templates', function() {
-//     return gulp.src(paths.templates)
-//         .pipe(minifyHTML())
-//         .pipe(gulp.dest('dist/templates'));
-// });
 
 /**
  * Watch custom files
@@ -83,7 +76,6 @@ gulp.task('watchResources', function() {
     gulp.watch(paths.images, ['custom-images']);
     gulp.watch(paths.styles, ['custom-less']);
     gulp.watch(paths.scripts, ['custom-js']);
-    // gulp.watch([paths.templates], ['custom-templates']);
     gulp.watch(paths.index, ['usemin']);
 });
 
