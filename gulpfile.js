@@ -58,7 +58,7 @@ gulp.task('custom-images', function() {
 });
 
 gulp.task('custom-js', function() {
-    var filterSpecs = filter(['*','!*.spec.js']);
+    var filterSpecs = filter(['**/*','!*.spec.js']);
     return gulp.src(paths.scripts)
         .pipe(filterSpecs)
         .pipe(minifyJs())
