@@ -8,6 +8,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     less = require('gulp-less'),
     rename = require('gulp-rename'),
+    filter = require('gulp-filter'),
     minifyHTML = require('gulp-minify-html'),
     Server = require('karma').Server,
     protractor = require("gulp-protractor").protractor;
@@ -18,7 +19,7 @@ var paths = {
     images: 'src/assets/img/**/*.*',
     templates: 'src/**/*.html',
     index: 'src/index.html',
-    bower_fonts: 'src/assets/libs/**/*.{ttf,woff,eof,svg}',
+    bower_fonts: 'src/assets/libs/**/*.{ttf,woff,woff2,eof,svg}',
 };
 
 /**
@@ -57,7 +58,9 @@ gulp.task('custom-images', function() {
 });
 
 gulp.task('custom-js', function() {
+    var filterSpecs = filter(['*','!*.spec.js']);
     return gulp.src(paths.scripts)
+        .pipe(filterSpecs)
         .pipe(minifyJs())
         .pipe(concat('dashboard.min.js'))
         .pipe(gulp.dest('dist/js'));
