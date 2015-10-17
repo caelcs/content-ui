@@ -19,6 +19,8 @@ var paths = {
     images: 'src/assets/img/**/*.*',
     templates: 'src/**/*.html',
     index: 'src/index.html',
+    distJs: 'dist/js',
+    distLibs: 'dist/libs',
     bower_fonts: 'src/assets/libs/**/*.{ttf,woff,woff2,eof,svg}',
 };
 
@@ -30,6 +32,15 @@ gulp.task('usemin', function() {
         .pipe(usemin({
             js: [minifyJs(), 'concat'],
             css: [minifyCss({keepSpecialComments: 0}), 'concat'],
+        }))
+        .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('usemin-dev', function() {
+    return gulp.src(paths.index)
+        .pipe(usemin({
+            js: ['concat'],
+            css: ['concat'],
         }))
         .pipe(gulp.dest('dist/'));
 });
@@ -50,7 +61,9 @@ gulp.task('copy-bower_fonts', function() {
 /**
  * Handle custom files
  */
-gulp.task('build-custom', ['custom-images', 'custom-js', 'custom-less']);
+gulp.task('build-custom', ['custom-images', 'custom-js', 'custom-minify-js', 'custom-less']);
+
+gulp.task('build-custom-dev', ['custom-images', 'custom-js', 'custom-less']);
 
 gulp.task('custom-images', function() {
     return gulp.src(paths.images)
@@ -61,9 +74,14 @@ gulp.task('custom-js', function() {
     var filterSpecs = filter(['**/*','!*.spec.js']);
     return gulp.src(paths.scripts)
         .pipe(filterSpecs)
-        .pipe(minifyJs())
         .pipe(concat('dashboard.min.js'))
-        .pipe(gulp.dest('dist/js'));
+        .pipe(gulp.dest(paths.distJs));
+});
+
+gulp.task('custom-minify-js', function() {
+    return gulp.src([paths.distJs])
+        .pipe(minifyJs())
+        .pipe(gulp.dest(paths.distJs));
 });
 
 gulp.task('custom-less', function() {
@@ -102,6 +120,7 @@ gulp.task('livereload', function() {
  * Gulp tasks
  */
 gulp.task('build', ['usemin', 'build-assets', 'build-custom']);
+gulp.task('buildDev', ['usemin-dev', 'build-assets', 'build-custom-dev']);
 gulp.task('default', ['build', 'webserver', 'livereload', 'watchResources']);
 
 /**
@@ -114,7 +133,7 @@ gulp.task('unit', function (done) {
   }, done).start();
 });
 
-gulp.task('e2e', function(done) {
+gulp.task('e2e', function (done) {
   var args = ['--baseUrl', 'http://127.0.0.1:8888'];
   gulp.src(["./tests/**/*.js"])
     .pipe(protractor({

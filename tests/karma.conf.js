@@ -6,14 +6,14 @@ module.exports = function(config){
     files : [
       '../src/assets/libs/angular/angular.js',
       '../src/assets/libs/angular-bootstrap/ui-bootstrap-tpls.js',
-      '../src/assets/libs/angular-cookies/angular-cookies.min.js',
-      '../src/assets/libs/angular-ui-router/release/angular-ui-router.min.js',
+      '../src/assets/libs/angular-cookies/angular-cookies.js',
+      '../src/assets/libs/angular-ui-router/release/angular-ui-router.js',
       '../src/app/**/*.js'
     ],
 
     port : 8888,
 
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
     autoWatch : true,
 

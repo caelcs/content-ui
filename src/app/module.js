@@ -1,1 +1,5 @@
-angular.module('CopyshareContent', ['ui.bootstrap', 'ui.router', 'ngCookies']);
+(function() {
+	'use strict';
+
+	angular.module('CopyshareContent', ['ui.bootstrap', 'ui.router', 'ngCookies']);
+})();
