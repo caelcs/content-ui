@@ -78,7 +78,6 @@ gulp.task('custom-less', function() {
 gulp.task('watchResources', function() {
     gulp.watch(paths.images, ['custom-images']);
     gulp.watch(paths.styles, ['custom-less']);
-    gulp.watch(paths.scripts, ['custom-js']);
     gulp.watch(paths.index, ['usemin']);
 });
 
