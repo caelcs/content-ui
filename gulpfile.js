@@ -20,7 +20,6 @@ var paths = {
     templates: 'src/**/*.html',
     index: 'src/index.html',
     distJs: 'dist/js',
-    distLibs: 'dist/libs',
     bower_fonts: 'src/assets/libs/**/*.{ttf,woff,woff2,eof,svg}',
 };
 
@@ -61,9 +60,9 @@ gulp.task('copy-bower_fonts', function() {
 /**
  * Handle custom files
  */
-gulp.task('build-custom', ['custom-images', 'custom-js', 'custom-minify-js', 'custom-less']);
+gulp.task('build-custom', ['custom-images', 'custom-js', 'custom-less']);
 
-gulp.task('build-custom-dev', ['custom-images', 'custom-js', 'custom-less']);
+gulp.task('build-custom-dev', ['custom-images', 'custom-js-dev', 'custom-less']);
 
 gulp.task('custom-images', function() {
     return gulp.src(paths.images)
@@ -74,13 +73,16 @@ gulp.task('custom-js', function() {
     var filterSpecs = filter(['**/*','!*.spec.js']);
     return gulp.src(paths.scripts)
         .pipe(filterSpecs)
+        .pipe(minifyJs())
         .pipe(concat('dashboard.min.js'))
         .pipe(gulp.dest(paths.distJs));
 });
 
-gulp.task('custom-minify-js', function() {
-    return gulp.src([paths.distJs])
-        .pipe(minifyJs())
+gulp.task('custom-js-dev', function() {
+    var filterSpecs = filter(['**/*','!*.spec.js']);
+    return gulp.src(paths.scripts)
+        .pipe(filterSpecs)
+        .pipe(concat('dashboard.min.js'))
         .pipe(gulp.dest(paths.distJs));
 });
 

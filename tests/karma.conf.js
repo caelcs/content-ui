@@ -8,12 +8,13 @@ module.exports = function(config){
       '../src/assets/libs/angular-bootstrap/ui-bootstrap-tpls.js',
       '../src/assets/libs/angular-cookies/angular-cookies.js',
       '../src/assets/libs/angular-ui-router/release/angular-ui-router.js',
-      '../src/app/**/*.js'
+      '../src/app/**/!*.spec.js',
+      '../src/app/**/*.spec.js'
     ],
 
     port : 8888,
 
-    logLevel: config.LOG_DEBUG,
+    logLevel: config.LOG_INFO,
 
     autoWatch : true,
 
@@ -32,8 +33,8 @@ module.exports = function(config){
 
     junitReporter : {
       outputDir: '../test_out/xml',
-      outputFile: 'gretter.xml',
-      suite: 'greeter'
+      outputFile: 'junit.xml',
+      suite: 'junit'
     }
 
   });
