@@ -47,5 +47,8 @@ Icon
 # Bower components
 /src/assets/libs
 
+# assets css
+/src/assets/css
+
 # test results
 test_out
