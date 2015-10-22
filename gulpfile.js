@@ -12,7 +12,6 @@ var gulp = require('gulp'),
     minifyHTML = require('gulp-minify-html'),
     Server = require('karma').Server,
     protractor = require("gulp-protractor").protractor;
-    googleWebFonts = require('gulp-google-webfonts');
 
 var paths = {
     scripts: 'src/app/**/*.js',
@@ -42,7 +41,7 @@ gulp.task('dist-app', function() {
     return gulp.src(paths.index)
         .pipe(usemin({
             js: [minifyJs(), 'concat'],
-            css: [minifyCss({keepSpecialComments: 0}), 'concat'],
+            css: [minifyCss({keepSpecialComments: 0}), 'concat']
         }))
         .pipe(gulp.dest('dist/'));
 });
