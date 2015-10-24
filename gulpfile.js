@@ -27,7 +27,7 @@ var paths = {
     
     index: 'src/index.html',
     
-    bower_fonts: 'build/libs/**/*.{ttf,woff,woff2,eof,svg}'
+    bower_fonts: 'bower_components/**/*.{ttf,woff,woff2,eof,svg}'
 };
 
 /**
@@ -92,7 +92,7 @@ gulp.task('lib-fonts', function() {
         .pipe(rename({
             dirname: '/fonts'
         }))
-        .pipe(gulp.dest('dist/lib/'));
+        .pipe(gulp.dest('dist/'));
 });
 
 /**
