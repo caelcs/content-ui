@@ -1,7 +1,7 @@
 # Content UI
 ## Responsive, bootstrap powered Homepage!
 
-Content ui is an AngularJS implementation of the RDash admin dashboard in order to provide a way to publish or get your
+Content ui is an AngularJS dashboard in order to provide a way to publish or get your
 content.
 
 ## Usage
