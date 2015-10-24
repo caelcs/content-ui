@@ -21,10 +21,9 @@ var paths = {
     app_images: 'src/assets/img/**/*.*',
     app_html: 'src/**/*.html',
 
-    generated_app_html: 'build/**/*.html',
-    generated_app_css: 'build/css/**/*.min.css',
-    generated_lib_css: 'build/lib/css/**/*.min.css',
-    generated_lib_scripts: 'build/lib/js/*.min.js',
+    generated_html: 'build/**/*.html',
+    generated_css: 'build/css/**/*.min.css',
+    generated_scripts: 'build/js/**/*.min.js',
     
     index: 'src/index.html',
     
@@ -66,7 +65,7 @@ gulp.task('build-html-dev', function() {
 /**
  * Distribution of all the assets
  */
-gulp.task('dist', ['lib-css', 'lib-scripts', 'lib-fonts', 'app-images', 'app-css', 'app-html']);
+gulp.task('dist', ['lib-fonts', 'app-images', 'app-css', 'app-scripts', 'app-html']);
 
 gulp.task('app-images', function() {
     return gulp.src(paths.app_images)
@@ -74,18 +73,18 @@ gulp.task('app-images', function() {
 });
 
 gulp.task('app-css', function() {
-    return gulp.src(paths.generated_app_css)
+    return gulp.src(paths.generated_css)
         .pipe(gulp.dest('dist/css/'));
 });
 
-gulp.task('app-html', function() {
-    return gulp.src(paths.generated_app_html)
-        .pipe(gulp.dest('dist/'));
+gulp.task('app-scripts', function() {
+    return gulp.src(paths.generated_scripts)
+        .pipe(gulp.dest('dist/js/'));
 });
 
-gulp.task('lib-css', function() {
-    return gulp.src(paths.generated_lib_css)
-        .pipe(gulp.dest('dist/lib/css/'));
+gulp.task('app-html', function() {
+    return gulp.src(paths.generated_html)
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('lib-fonts', function() {
@@ -94,11 +93,6 @@ gulp.task('lib-fonts', function() {
             dirname: '/fonts'
         }))
         .pipe(gulp.dest('dist/lib/'));
-});
-
-gulp.task('lib-scripts', function() {
-    return gulp.src(paths.generated_lib_scripts)
-        .pipe(gulp.dest('dist/lib/js/'));
 });
 
 /**
