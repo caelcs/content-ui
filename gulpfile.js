@@ -16,14 +16,18 @@ var gulp = require('gulp'),
     protractor = require("gulp-protractor").protractor;
 
 var paths = {
-    scripts: 'src/app/**/*.js',
-    styles: 'src/assets/less/**/*.*',
-    css: 'build/css/**/*.min.css',
-    lib_css: 'build/lib/css/**/*.min.css',
-    images: 'src/assets/img/**/*.*',
-    templates: 'src/**/*.html',
+    app_scripts: 'src/app/**/*.js',
+    app_less: 'src/assets/less/**/*.*',
+    app_images: 'src/assets/img/**/*.*',
+    app_html: 'src/**/*.html',
+
+    generated_app_html: 'build/**/*.html',
+    generated_app_css: 'build/css/**/*.min.css',
+    generated_lib_css: 'build/lib/css/**/*.min.css',
+    generated_lib_scripts: 'build/lib/js/*.min.js',
+    
     index: 'src/index.html',
-    auto_enerated_assets: 'build/**/*.{html,js}',
+    
     bower_fonts: 'build/libs/**/*.{ttf,woff,woff2,eof,svg}'
 };
 
@@ -33,7 +37,7 @@ var paths = {
 gulp.task('build-assets', ['compile-less']);
 
 gulp.task('compile-less', function() {
-    return gulp.src(paths.styles)
+    return gulp.src(paths.app_less)
         .pipe(less())
         .pipe(gulp.dest('build/css/'));
 });
@@ -60,26 +64,31 @@ gulp.task('build-html-dev', function() {
 });
 
 /**
- * Handle custom files
+ * Distribution of all the assets
  */
-gulp.task('build-dist', ['custom-images', 'vendor-fonts', 'custom-css', 'lib-css', 'auto-generated-assets']);
+gulp.task('build-dist', ['lib-css', 'lib-scripts', 'lib-fonts', 'app-images', 'app-css', 'app-html']);
 
-gulp.task('custom-images', function() {
-    return gulp.src(paths.images)
+gulp.task('app-images', function() {
+    return gulp.src(paths.app_images)
         .pipe(gulp.dest('dist/img/'));
 });
 
-gulp.task('custom-css', function() {
-    return gulp.src(paths.css)
+gulp.task('app-css', function() {
+    return gulp.src(paths.generated_app_css)
         .pipe(gulp.dest('dist/css/'));
 });
 
+gulp.task('app-html', function() {
+    return gulp.src(paths.generated_app_html)
+        .pipe(gulp.dest('dist/'));
+});
+
 gulp.task('lib-css', function() {
-    return gulp.src(paths.lib_css)
+    return gulp.src(paths.generated_lib_css)
         .pipe(gulp.dest('dist/lib/css/'));
 });
 
-gulp.task('vendor-fonts', function() {
+gulp.task('lib-fonts', function() {
     return gulp.src(paths.bower_fonts)
         .pipe(rename({
             dirname: '/fonts'
@@ -87,9 +96,9 @@ gulp.task('vendor-fonts', function() {
         .pipe(gulp.dest('dist/lib/'));
 });
 
-gulp.task('auto-generated-assets', function() {
-    return gulp.src(paths.auto_enerated_assets)
-        .pipe(gulp.dest('dist/'));
+gulp.task('lib-scripts', function() {
+    return gulp.src(paths.generated_lib_scripts)
+        .pipe(gulp.dest('dist/lib/js/'));
 });
 
 /**
@@ -103,8 +112,8 @@ gulp.task('clean', function(callback) {
  * Watch custom files
  */
 gulp.task('watchResources', function() {
-    gulp.watch(paths.styles, ['compile-less']);
-    gulp.watch(paths.images, ['custom-images']);
+    gulp.watch(paths.app_less, ['compile-less']);
+    gulp.watch(paths.app_images, ['custom-images']);
     gulp.watch(paths.index, ['usemin']);
 });
 
