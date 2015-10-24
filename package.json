@@ -23,6 +23,8 @@
         "gulp-angular-filesort": "~1.1.1",
         "gulp-filter": "~3.0.1",
         "gulp-protractor": "~1.0.0",
+        "run-sequence": "~1.1.4",
+        "del": "~2.0.2",
         "jasmine-core": "^2.3.4",
         "karma": "~0.13.10",
         "karma-jasmine": "^0.3.6",

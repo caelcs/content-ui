@@ -44,11 +44,11 @@ Icon
 # Node modules
 /node_modules
 
-# Bower components
-/src/assets/libs
-
-# assets css
-/src/assets/css
+# build
+/build
 
 # test results
 test_out
+
+# bower components
+/bower_components

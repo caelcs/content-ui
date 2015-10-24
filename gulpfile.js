@@ -11,16 +11,20 @@ var gulp = require('gulp'),
     filter = require('gulp-filter'),
     minifyHTML = require('gulp-minify-html'),
     Server = require('karma').Server,
+    runSequence = require('run-sequence'),
+    del = require('del'),
     protractor = require("gulp-protractor").protractor;
 
 var paths = {
     scripts: 'src/app/**/*.js',
     styles: 'src/assets/less/**/*.*',
-    css: 'src/assets/css/app.min.js',
+    css: 'build/css/**/*.min.css',
+    lib_css: 'build/lib/css/**/*.min.css',
     images: 'src/assets/img/**/*.*',
     templates: 'src/**/*.html',
     index: 'src/index.html',
-    bower_fonts: 'src/assets/libs/**/*.{ttf,woff,woff2,eof,svg}'
+    auto_enerated_assets: 'build/**/*.{html,js}',
+    bower_fonts: 'build/libs/**/*.{ttf,woff,woff2,eof,svg}'
 };
 
 /**
@@ -31,43 +35,48 @@ gulp.task('build-assets', ['compile-less']);
 gulp.task('compile-less', function() {
     return gulp.src(paths.styles)
         .pipe(less())
-        .pipe(gulp.dest('src/assets/css'));
+        .pipe(gulp.dest('build/css/'));
 });
 
 /**
  * Build html, and concat resources files
  */
-gulp.task('dist-app', function() {
+gulp.task('build-html', function() {
     return gulp.src(paths.index)
         .pipe(usemin({
             js: [minifyJs(), 'concat'],
             css: [minifyCss({keepSpecialComments: 0}), 'concat']
         }))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest('build/'));
 });
 
-gulp.task('dist-app-dev', function() {
+gulp.task('build-html-dev', function() {
     return gulp.src(paths.index)
         .pipe(usemin({
             js: ['concat'],
             css: ['concat'],
         }))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest('build/'));
 });
 
 /**
  * Handle custom files
  */
-gulp.task('dist', ['custom-images', 'vendor-fonts', 'custom-css']);
+gulp.task('build-dist', ['custom-images', 'vendor-fonts', 'custom-css', 'lib-css', 'auto-generated-assets']);
 
 gulp.task('custom-images', function() {
     return gulp.src(paths.images)
-        .pipe(gulp.dest('dist/img'));
+        .pipe(gulp.dest('dist/img/'));
 });
 
 gulp.task('custom-css', function() {
     return gulp.src(paths.css)
-        .pipe(gulp.dest('dist/css'));
+        .pipe(gulp.dest('dist/css/'));
+});
+
+gulp.task('lib-css', function() {
+    return gulp.src(paths.lib_css)
+        .pipe(gulp.dest('dist/lib/css/'));
 });
 
 gulp.task('vendor-fonts', function() {
@@ -76,6 +85,18 @@ gulp.task('vendor-fonts', function() {
             dirname: '/fonts'
         }))
         .pipe(gulp.dest('dist/lib/'));
+});
+
+gulp.task('auto-generated-assets', function() {
+    return gulp.src(paths.auto_enerated_assets)
+        .pipe(gulp.dest('dist/'));
+});
+
+/**
+ * Clean tasks
+ */
+gulp.task('clean', function(callback) {
+    return del(['build', 'dist'], callback);
 });
 
 /**
@@ -106,8 +127,15 @@ gulp.task('livereload', function() {
 /**
  * Gulp tasks
  */
-gulp.task('build', ['build-assets', 'dist-app', 'dist']);
-gulp.task('buildDev', ['build-assets', 'dist-app-dev', 'dist']);
+gulp.task('build', function(callback) {
+  runSequence('clean', 
+              'build-assets',
+              'build-html',
+              'build-dist',
+              callback);
+});
+
+gulp.task('buildDev', ['build-assets', 'build-html-dev', 'dist']);
 gulp.task('default', ['build', 'webserver', 'livereload', 'watchResources']);
 
 /**
