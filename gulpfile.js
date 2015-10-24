@@ -66,7 +66,7 @@ gulp.task('build-html-dev', function() {
 /**
  * Distribution of all the assets
  */
-gulp.task('build-dist', ['lib-css', 'lib-scripts', 'lib-fonts', 'app-images', 'app-css', 'app-html']);
+gulp.task('dist', ['lib-css', 'lib-scripts', 'lib-fonts', 'app-images', 'app-css', 'app-html']);
 
 gulp.task('app-images', function() {
     return gulp.src(paths.app_images)
@@ -112,9 +112,9 @@ gulp.task('clean', function(callback) {
  * Watch custom files
  */
 gulp.task('watchResources', function() {
-    gulp.watch(paths.app_less, ['compile-less']);
-    gulp.watch(paths.app_images, ['custom-images']);
-    gulp.watch(paths.index, ['usemin']);
+    gulp.watch(paths.app_less, ['build-assets', 'dist']);
+    gulp.watch(paths.app_images, ['app-images']);
+    gulp.watch(paths.index, ['build-html-dev', 'dist']);
 });
 
 /**
@@ -140,12 +140,25 @@ gulp.task('build', function(callback) {
   runSequence('clean', 
               'build-assets',
               'build-html',
-              'build-dist',
+              'dist',
               callback);
 });
 
-gulp.task('buildDev', ['build-assets', 'build-html-dev', 'dist']);
-gulp.task('default', ['build', 'webserver', 'livereload', 'watchResources']);
+gulp.task('buildDev', function(callback) {
+  runSequence('clean', 
+              'build-assets',
+              'build-html-dev',
+              'dist',
+              callback);
+});
+
+gulp.task('default', function(callback) {
+  runSequence('build', 
+              'webserver',
+              'livereload',
+              'watchResources',
+              callback);
+});
 
 /**
  * Run test once and exit
