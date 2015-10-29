@@ -5,7 +5,8 @@
      * Master Controller
      */
 
-    angular.module('CopyshareContent')
+    angular
+    	.module('CopyshareContent')
         .controller('MasterCtrl', ['$scope', MasterCtrl]);
 
     function MasterCtrl($scope) {
