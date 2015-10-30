@@ -46,6 +46,22 @@ var paths = {
     bower_fonts: 'bower_components/**/*.{ttf,woff,woff2,eof,svg}'
 };
 
+gulp.task('build', function(callback) {
+  runSequence('clean', 
+            [
+                'build-css', 
+                'build-templates', 
+                'build-app', 
+                'build-index', 
+                'build-libs-css', 
+                'build-libs-js', 
+                'build-images', 
+                'build-libs-font'
+            ],
+            'minify',
+            callback);
+});
+
 gulp.task('buildDev', function(callback) {
   runSequence('clean', 
             [
@@ -68,7 +84,6 @@ gulp.task('clean', function(callback) {
 gulp.task('build-css', function() {
     return gulp.src(paths.app_less)
         .pipe(less())
-        .pipe(minifyCss({keepSpecialComments: 0}))
         .pipe(concat("app.min.css"))
         .pipe(gulp.dest('build/assets/css'));
 });
@@ -85,20 +100,17 @@ gulp.task('build-templates', function() {
           prefix: "/"
         }))
         .pipe(concat("templates.min.js"))
-        .pipe(minifyJs())
         .pipe(gulp.dest('build/app'));
 });
 
 gulp.task('build-app', function() {
     return gulp.src(paths.app_scripts)
-        .pipe(minifyJs())
         .pipe(concat("app.min.js"))
         .pipe(gulp.dest('build/app'));
 });
 
 gulp.task('build-libs-js', function() {
     return gulp.src(paths.libs_scripts)
-        .pipe(minifyJs())
         .pipe(concat("vendor.min.js"))
         .pipe(gulp.dest('build/assets/libs/js'));
 });
@@ -118,17 +130,34 @@ gulp.task('build-libs-font', function() {
 
 gulp.task('build-libs-css', function() {
     return gulp.src(paths.libs_css)
-        .pipe(minifyCss())
         .pipe(concat('vendor.min.css'))
         .pipe(gulp.dest('build/assets/libs/css'));
 });
 
 gulp.task('build-index', function() {
     return gulp.src(paths.index)
-        .pipe(minifyHtml())
         .pipe(gulp.dest('build'));
 });
 
+gulp.task('minify', ['minify-html', 'minify-css', 'minify-js'])
+
+gulp.task('minify-html', function() {
+    return gulp.src('build/index.html')
+        .pipe(minifyHtml())
+        .pipe(gulp.dest('build'));     
+});
+
+gulp.task('minify-css', function() {
+    return gulp.src('build/**/*.css')
+        .pipe(minifyCss())
+        .pipe(gulp.dest('build'));     
+});
+
+gulp.task('minify-js', function() {
+    return gulp.src('build/**/*.js')
+        .pipe(minifyJs())
+        .pipe(gulp.dest('build'));     
+});
 
 gulp.task('watchResources', function() {
     gulp.watch(paths.app_less, ['build-css']);
@@ -152,7 +181,7 @@ gulp.task('livereload', function() {
 });
 
 gulp.task('default', function(callback) {
-  runSequence('build', 
+  runSequence('buildDev', 
               'webserver',
               'livereload',
               'watchResources',
