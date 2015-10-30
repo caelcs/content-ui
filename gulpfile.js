@@ -95,7 +95,7 @@ gulp.task('build-templates', function() {
           quotes: true
         }))
         .pipe(html2Js({
-          moduleName: "cpTemplates",
+          moduleName: "app.templates",
           prefix: "/"
         }))
         .pipe(concat("templates.min.js"))
@@ -105,7 +105,7 @@ gulp.task('build-templates', function() {
 gulp.task('build-templates-dev', function() {
     return gulp.src(paths.app_html)
         .pipe(html2Js({
-          moduleName: "cpTemplates",
+          moduleName: "app.templates",
           prefix: "/"
         }))
         .pipe(concat("templates.min.js"))

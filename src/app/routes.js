@@ -5,11 +5,11 @@
      */
     angular.module('CopyshareContent').config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         // For unmatched routes
-        $urlRouterProvider.otherwise('/intro');
+        $urlRouterProvider.otherwise('/');
 
         $stateProvider.state('intro', {
-            url: '/intro',
-            templateUrl: 'dashboard/intro/intro.html'
+            url: '/',
+            templateUrl: '/components/dashboard/intro/intro.html'
         });
     }]);
 }());
