@@ -65,7 +65,7 @@ gulp.task('buildDev', function(callback) {
   runSequence('clean', 
             [
                 'build-css', 
-                'build-templates', 
+                'build-templates-dev', 
                 'build-app', 
                 'build-index', 
                 'build-libs-css', 
@@ -95,7 +95,17 @@ gulp.task('build-templates', function() {
           quotes: true
         }))
         .pipe(html2Js({
-          moduleName: "HtmlTemplatesModule",
+          moduleName: "cpTemplates",
+          prefix: "/"
+        }))
+        .pipe(concat("templates.min.js"))
+        .pipe(gulp.dest('build/app'));
+});
+
+gulp.task('build-templates-dev', function() {
+    return gulp.src(paths.app_html)
+        .pipe(html2Js({
+          moduleName: "cpTemplates",
           prefix: "/"
         }))
         .pipe(concat("templates.min.js"))
