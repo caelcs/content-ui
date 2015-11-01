@@ -720,3 +720,16 @@ img::-moz-selection {
 body {
     webkit-tap-highlight-color: @brand-primary;
 }
+
+#masterUI.ng-enter,
+#masterUI.ng-leave {
+    .transition(0.5s all ease)
+}
+
+#masterUI.ng-enter { 
+	.effect(fadeInUp);
+}
+
+#masterUI.ng-leave { 
+	.effect(fadeOutDown);
+}

@@ -65,3 +65,16 @@
 	font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	text-transform: uppercase;
 }
+
+.transition(@transition) {
+  -webkit-transition: @transition;
+     -moz-transition: @transition;
+       -o-transition: @transition;
+          transition: @transition;
+}
+
+.effect(@effect) {
+	-webkit-animation:@effect 0.5s both ease;
+    -moz-animation:@effect 0.5s both ease;
+    animation:@effect 0.5s both ease;
+}

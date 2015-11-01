@@ -28,7 +28,8 @@ var paths = {
     
     libs_css: [
         'bower_components/bootstrap/dist/css/bootstrap.min.css',
-        'bower_components/font-awesome/css/font-awesome.min.css'
+        'bower_components/font-awesome/css/font-awesome.min.css',
+        'bower_components/animate.css/animate.min.css'
     ],
     libs_scripts: [
         'bower_components/jquery/dist/jquery.js',
