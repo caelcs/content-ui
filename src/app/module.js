@@ -7,8 +7,9 @@
 				'ui.bootstrap', 
 				'ui.router', 
 				'ngCookies', 
-				'ngAnimate', 
-				'app.templates'
+				'ngAnimate',
+				'app.templates',
+				'oauth'
 			]
 		);
 })();

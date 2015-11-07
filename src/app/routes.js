@@ -8,12 +8,17 @@
         .config(
             [
                 '$stateProvider',
-                 '$urlRouterProvider', 
-                 cpStateProviders
-            ]
-    );
+                '$urlRouterProvider',
+                 cpConfigStateProviders
+            ])
+        .config(['$locationProvider',cpConfigLocationProvider]);
 
-    function cpStateProviders ($stateProvider, $urlRouterProvider) {
+    function cpConfigLocationProvider ($locationProvider) {
+        $locationProvider.html5Mode(true);      
+    };
+
+    function cpConfigStateProviders ($stateProvider, $urlRouterProvider) {
+        
         $urlRouterProvider.otherwise('/');
 
         $stateProvider.state('index', {
@@ -26,19 +31,9 @@
             templateUrl: '/components/dashboard/intro/intro.html'
         });
 
-        $stateProvider.state('services', {
-            url: '/services',
-            templateUrl: '/components/dashboard/services/services.html'
-        });
-
         $stateProvider.state('about', {
             url: '/about',
             templateUrl: '/components/dashboard/about/about.html'
-        });
-
-        $stateProvider.state('portfolio', {
-            url: '/portfolio',
-            templateUrl: '/components/dashboard/portfolio/portfolio.html'
         });
 
         $stateProvider.state('team', {
