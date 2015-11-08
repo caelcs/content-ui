@@ -4,7 +4,11 @@
         <div class="intro-text">
             <div class="intro-lead-in">Welcome To Copyshare!</div>
             <div class="intro-heading">A way to notify yourself</div>
-            <a href="#/about" class="btn btn-xl">Log in</a>
+            <oauth site="http://localhost:9080/sso"
+            client-id="1371573098test-477332204"
+            redirect-uri="http://localhost:8888/dashboard/content/check"
+            template="/components/public/login/login.html">
+            </oauth>
         </div>
     </div>
 </header>

@@ -183,7 +183,8 @@ gulp.task('webserver', function() {
     connect.server({
         root: 'build',
         livereload: true,
-        port: 8888
+        port: 8888,
+        fallback: 'build/index.html'
     });
 });
 

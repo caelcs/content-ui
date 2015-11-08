@@ -23,6 +23,7 @@
 
         /** PUBLIC site **/
         $stateProvider.state('public', {
+            abstract: true,
             templateUrl: '/components/public/main.html'
         });
 
@@ -54,6 +55,7 @@
 
         /** SECURE site **/
         $stateProvider.state('dashboard', {
+            abstract: true,
             templateUrl: '/components/dashboard/main.html'
         });
 
