@@ -21,30 +21,58 @@
         
         $urlRouterProvider.otherwise('/');
 
-        $stateProvider.state('index', {
+        /** PUBLIC site **/
+        $stateProvider.state('public', {
+            templateUrl: '/components/public/main.html'
+        });
+
+        $stateProvider.state('public.index', {
             url: '/',
-            templateUrl: '/components/dashboard/intro/intro.html'
+            templateUrl: '/components/public/intro/intro.html'
         });
 
-        $stateProvider.state('intro', {
+        $stateProvider.state('public.intro', {
             url: '/intro',
-            templateUrl: '/components/dashboard/intro/intro.html'
+            templateUrl: '/components/public/intro/intro.html'
         });
 
-        $stateProvider.state('about', {
+        $stateProvider.state('public.about', {
             url: '/about',
-            templateUrl: '/components/dashboard/about/about.html'
+            templateUrl: '/components/public/about/about.html'
         });
 
-        $stateProvider.state('team', {
+        $stateProvider.state('public.team', {
             url: '/team',
-            templateUrl: '/components/dashboard/team/team.html'
+            templateUrl: '/components/public/team/team.html'
         });
 
-        $stateProvider.state('contact', {
+        $stateProvider.state('public.contact', {
             url: '/contact',
-            templateUrl: '/components/dashboard/contact/contact.html'
+            templateUrl: '/components/public/contact/contact.html'
         });
+        /** END PUBLIC site **/
+
+        /** SECURE site **/
+        $stateProvider.state('dashboard', {
+            templateUrl: '/components/dashboard/main.html'
+        });
+
+        $stateProvider.state('dashboard.check', {
+            url: '/dashboard/content/check',
+            templateUrl: '/components/dashboard/content/check/check.html'
+        });
+
+        $stateProvider.state('dashboard.share', {
+            url: '/dashboard/content/share',
+            templateUrl: '/components/dashboard/content/share/share.html'
+        });
+
+        $stateProvider.state('dashboard.history', {
+            url: '/dashboard/content/history',
+            templateUrl: '/components/dashboard/content/history/history.html'
+        });
+        /** END SECURE site **/
+
     };
 
 }());
