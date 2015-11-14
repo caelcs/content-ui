@@ -8,8 +8,10 @@
 				'ui.router', 
 				'ngCookies', 
 				'ngAnimate',
-				'app.templates',
-				'oauth'
+				'oauth',
+				'CopyshareContent.public',
+				'CopyshareContent.dashboard',
+				'app.templates'
 			]
 		);
 })();

@@ -6,7 +6,7 @@
      */
 
     angular
-    	.module('CopyshareContent')
+    	.module('CopyshareContent.public', [])
         .controller('MasterCtrl', ['$scope', MasterCtrl]);
 
     function MasterCtrl($scope) {
