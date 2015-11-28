@@ -4,17 +4,28 @@
      * Route configuration for the CopyshareContent module.
      */
     angular
-        .module('CopyshareContent', []),
+        .module('CopyshareContent', [])
         .config(
-            [
-                '$locationProvider',
-                '$urlRouterProvider',
-                 cpConfigDefault
-            ]);
+        [
+            '$locationProvider', 
+            '$urlRouterProvider',
+            cpConfigDefault
+        ])
+        .config(
+        [
+            'OAuthConfigurationProvider', 
+            '$httpProvider',
+            cpConfigOAuthProvider
+        ]);
 
-    function cpConfigDefault ($locationProvider, $urlRouterProvider) {
+    function cpConfigOAuthProvider(OAuthConfigurationProvider, $httpProvider) {
+        OAuthConfigurationProvider.init({
+            protectedResources: ['http://localhost:8080']
+        }, $httpProvider);
+    };
+
+    function cpConfigDefault($locationProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/');
-
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(true).hashPrefix('!');
     };
 }());

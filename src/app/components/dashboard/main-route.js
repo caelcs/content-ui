@@ -15,10 +15,13 @@
     function cpConfigCommonSecureRoutes ($stateProvider, $locationProvider) {
         $stateProvider.state('dashboard', {
             abstract: true,
-            templateUrl: '/components/dashboard/main.html'
+            templateUrl: '/components/dashboard/main.html',
+            data: {
+                isSecure: true
+            }
         });
 
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(true).hashPrefix('!');
     };
 
 }());

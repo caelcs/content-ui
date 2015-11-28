@@ -15,7 +15,10 @@
     function cpConfigCommonPublicRoutes ($stateProvider, $locationProvider) {       
         $stateProvider.state('public', {
             abstract: true,
-            templateUrl: '/components/public/main.html'
+            templateUrl: '/components/public/main.html',
+            data: {
+                isSecure: false
+            }
         });
 
         $stateProvider.state('public.index', {
@@ -23,7 +26,7 @@
             templateUrl: '/components/public/intro/intro.html'
         });
 
-        $locationProvider.html5Mode(true);
+        $locationProvider.html5Mode(true).hashPrefix('!');
     };
 
 }());
