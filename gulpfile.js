@@ -203,9 +203,12 @@ gulp.task('default', function(callback) {
 
 gulp.task('unit', function (done) {
   new Server({
-    configFile: __dirname + '/tests/karma.conf.js',
-    singleRun: true
-  }, done).start();
+        configFile: __dirname + '/tests/karma.conf.js',
+        singleRun: true
+    },
+    function() {
+        done();
+    }).start();
 });
 
 gulp.task('e2e', function (done) {

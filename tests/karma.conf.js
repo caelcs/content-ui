@@ -4,9 +4,10 @@ module.exports = function(config){
     basePath : '.',
 
     files : [
-      '../dist/lib/js/vendor.min.js',
-      '../src/assets/libs/angular-mocks/angular-mocks.js',
-      '../dist/lib/js/app.min.js',
+      '../build/assets/libs/js/vendor.min.js',
+      '../bower_components/angular-mocks/angular-mocks.js',
+      '../build/app/app.min.js',
+      '../build/app/templates.min.js',
       '../src/app/**/*.spec.js'
     ],
 
@@ -27,12 +28,13 @@ module.exports = function(config){
             'karma-junit-reporter'
             ],
 
-    reporters: ['junit'],
+    reporters: ['progress','junit'],
 
     junitReporter : {
       outputDir: '../test_out/xml',
       outputFile: 'junit.xml',
-      suite: 'junit'
+      suite: 'junit',
+      useBrowserName: true
     }
 
   });
