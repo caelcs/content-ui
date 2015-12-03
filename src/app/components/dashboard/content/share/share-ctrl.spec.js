@@ -12,7 +12,10 @@ describe('Share controller function', function() {
     it('should get publisher to publish content', function() {
       var $scope = {};
       $controller('ShareController', {$scope: $scope});
+
       expect($controller).toBeDefined();
+      expect($scope.publisher()).toBe('');
+
     });
   });
 });

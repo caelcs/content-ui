@@ -30,7 +30,8 @@
     "bootstrap": "~3.3.5",
     "font-awesome": "~4.4.0",
     "animate.css": "~3.4.0",
-    "oauth-ng": "~0.4.2"
+    "oauth-ng": "~0.4.2",
+    "restangular": "~1.5.1"
   },
   "repository": {
     "type": "git",

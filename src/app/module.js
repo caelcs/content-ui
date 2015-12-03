@@ -9,6 +9,8 @@
 				'ngCookies', 
 				'ngAnimate',
 				'oauth',
+				'restangular',
+				'CopyshareContent.common.api',
 				'CopyshareContent.public',
 				'CopyshareContent.dashboard',
 				'app.templates'
