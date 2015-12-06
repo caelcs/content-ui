@@ -5,10 +5,14 @@
      */
     angular
         .module('CopyshareContent.common.api.publisher',[])
-        .factory('PublisherApi', PublisherApi);
+        .factory('PublisherApi', ['Restangular', PublisherApi]);
 
-    function PublisherApi ($scope, Restangular) {
-        
+    function PublisherApi (Restangular) {
+        return {
+            getCurrentLogin: function() {
+                return Restangular.one('publisher', 'current').get();    
+            }
+        };
     };
 
 }());

@@ -11,8 +11,9 @@
             cpConfigCommonApi
         ]);
 
-    function cpConfigCommonApi(RestangularProvider) {
-        RestangularProvider.setBaseUrl('/content-api');
+    function cpConfigCommonApi(RestangularProvider, AccessToken) {
+        RestangularProvider.setBaseUrl('/contentapi');
         RestangularProvider.setRequestSuffix('.json');
+        RestangularProvider.setDefaultHeaders({'Authorization': 'Bearer ' + AccessToken.get().access_token });
     };
 }());
