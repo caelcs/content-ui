@@ -8,9 +8,13 @@
         .controller('ShareController', ['$scope', 'PublisherApi', ShareController]);
 
     function ShareController ($scope, PublisherApi) {
+        $scope.current = 'none';
+
         $scope.publisher = function() {
             console.log('Share Controller step 1');
-            return PublisherApi.getCurrentLogin();
+            PublisherApi.getCurrentLogin().then(function(result) {
+                $scope.current = result;
+            });
         };
     };
 

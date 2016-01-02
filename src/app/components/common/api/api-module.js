@@ -12,6 +12,6 @@
 
     function cpConfigCommonApi(RestangularProvider, $httpProvider) {
         RestangularProvider.setBaseUrl('http://localhost:8080/contentapi');
-        RestangularProvider.setDefaultHttpFields({'withCredentials':'true'});
+        RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json'});
     };
 })();
