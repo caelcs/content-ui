@@ -1,11 +1,13 @@
 (function() {
     'use strict';
-    /**
-     * Route configuration for the public content.
-     */
-    angular
-        .module('CopyshareContent.public')
-        .config(
+
+    angular.module('CopyshareContent.public', [
+    	'CopyshareContent.public.about',
+    	'CopyshareContent.public.contact', 
+    	'CopyshareContent.public.intro', 
+    	'CopyshareContent.public.team'
+    ])
+    .config(
             [
                 '$stateProvider',
                 '$locationProvider',
@@ -15,7 +17,7 @@
     function cpConfigCommonPublicRoutes ($stateProvider, $locationProvider) {       
         $stateProvider.state('public', {
             abstract: true,
-            templateUrl: '/components/public/main.html',
+            templateUrl: '/components/public/public.html',
             data: {
                 isSecure: false
             }
@@ -28,5 +30,4 @@
 
         $locationProvider.html5Mode(true).hashPrefix('!');
     };
-
-}());
+})();

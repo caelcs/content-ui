@@ -7,6 +7,7 @@
         .module('CopyshareContent.common.api.publisher',[])
         .factory('PublisherApi', ['Restangular', PublisherApi]);
 
+
     function PublisherApi (Restangular) {
         return {
             getCurrentLogin: function() {

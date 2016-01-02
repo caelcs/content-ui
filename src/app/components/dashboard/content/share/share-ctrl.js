@@ -4,12 +4,13 @@
      * Route configuration for the CopyshareContent module.
      */
     angular
-        .module('CopyshareContent.dashboard.share.controller',[])
-        .controller('ShareController', ShareController);
+        .module('CopyshareContent.dashboard.share.controller', [])
+        .controller('ShareController', ['$scope', 'PublisherApi', ShareController]);
 
-    function ShareController ($scope) {
+    function ShareController ($scope, PublisherApi) {
         $scope.publisher = function() {
-            return '';
+            console.log('Share Controller step 1');
+            return PublisherApi.getCurrentLogin();
         };
     };
 

@@ -5,6 +5,17 @@
      */
     angular
         .module('CopyshareContent.dashboard.share', [
-            'CopyshareContent.dashboard.share.route',
-            'CopyshareContent.dashboard.share.controller']);
+            'CopyshareContent.dashboard.share.controller'])
+        .config(
+            [
+                '$stateProvider',
+                 cpConfigShareRoute
+        ]);
+
+    function cpConfigShareRoute ($stateProvider) {
+        $stateProvider.state('dashboard.share', {
+            url: '/dashboard/content/share',
+            templateUrl: '/components/dashboard/content/share/share.html'
+        });
+    };
 }());

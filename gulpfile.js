@@ -16,9 +16,7 @@ var gulp = require('gulp'),
 
 var paths = {
     app_scripts: [
-        'src/app/module.js',
-        'src/app/routes.js',
-        'src/app/shared/**/*.js',
+        'src/app/**/*module.js',
         'src/app/components/**/*.js',
         '!src/app/**/*.spec.js'
     ],
@@ -39,7 +37,7 @@ var paths = {
         'bower_components/angular-cookies/angular-cookies.js',
         'bower_components/angular-ui-router/release/angular-ui-router.js',
         'bower_components/angular-animate/angular-animate.js',
-        'bower_components/ngstorage/ngstorage.js',
+        'bower_components/ngstorage/ngStorage.js',
         'bower_components/oauth-ng/dist/oauth-ng.js',
         'bower_components/lodash/lodash.js',
         'bower_components/restangular/dist/restangular.js'
