@@ -1,1 +1,28 @@
-<h3>Check </h3>
+<section id="check-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Check content</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <form name="checkContent" id="contentForm" novalidate data-ng-controller="CheckController">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Content to share *" id="content" required data-validation-required-message="Please enter the content to be share" data-ng-model="content.content">
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 text-center">
+                            <div id="success"></div>
+                            <button type="submit" class="btn btn-xl" data-ng-click="checkAgain()">Check again</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -17,5 +17,10 @@
             url: '/dashboard/content/share',
             templateUrl: '/components/dashboard/content/share/share.html'
         });
+
+        $stateProvider.state('dashboard.another', {
+            url: '/dashboard/content/another',
+            templateUrl: '/components/dashboard/content/share/share-another.html'
+        });
     };
 }());
