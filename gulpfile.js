@@ -27,7 +27,9 @@ var paths = {
     libs_css: [
         'bower_components/bootstrap/dist/css/bootstrap.min.css',
         'bower_components/font-awesome/css/font-awesome.min.css',
-        'bower_components/animate.css/animate.min.css'
+        'bower_components/animate.css/animate.min.css',
+        'bower_components/angular-ui-notification/dist/angular-ui-notification.min.css'
+
     ],
     libs_scripts: [
         'bower_components/jquery/dist/jquery.js',
@@ -37,10 +39,13 @@ var paths = {
         'bower_components/angular-cookies/angular-cookies.js',
         'bower_components/angular-ui-router/release/angular-ui-router.js',
         'bower_components/angular-animate/angular-animate.js',
+        'bower_components/jsrasign/jsrasign-latest-all-min.js',
         'bower_components/ngstorage/ngStorage.js',
         'bower_components/oauth-ng/dist/oauth-ng.js',
         'bower_components/lodash/lodash.js',
-        'bower_components/restangular/dist/restangular.js'
+        'bower_components/restangular/dist/restangular.js',
+        'bower_components/angular-clipboard/angular-clipboard.js',
+        'bower_components/angular-ui-notification/dist/angular-ui-notification.js'
     ],
 
     index: 'src/index.html',

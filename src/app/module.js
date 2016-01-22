@@ -2,30 +2,33 @@
 	'use strict';
 
 	angular
-		.module('CopyshareContent', 
-			[
+		.module('CopyshareContent', [
 				'ui.bootstrap', 
 				'ui.router', 
 				'ngCookies', 
 				'ngAnimate',
 				'oauth',
 				'restangular',
+                'angular-clipboard',
+                'ui-notification',
                 'CopyshareContent.common.api',
 				'CopyshareContent.public',
 				'CopyshareContent.dashboard',
 				'app.templates'
 		])
-	 	.config(
-        [
+	 	.config([
             '$locationProvider', 
             '$urlRouterProvider',
             cpConfigDefault
         ])
-        .config(
-        [
+        .config([
             'OAuthConfigurationProvider', 
             '$httpProvider',
             cpConfigOAuthProvider
+        ])
+        .config([
+            'NotificationProvider', 
+            cpConfigNotifications
         ])
         .run(validateSecureUrls);
 
@@ -51,5 +54,17 @@
     function cpConfigDefault($locationProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/');
         $locationProvider.html5Mode(true).hashPrefix('!');
+    };
+
+    function cpConfigNotifications(NotificationProvider) {
+        NotificationProvider.setOptions({
+            delay: 10000,
+            startTop: 80,
+            startRight: 10,
+            verticalSpacing: 20,
+            horizontalSpacing: 20,
+            positionX: 'center',
+            positionY: 'top'
+        });
     };
 })();

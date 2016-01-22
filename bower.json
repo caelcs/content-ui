@@ -31,7 +31,9 @@
     "font-awesome": "~4.4.0",
     "animate.css": "~3.4.0",
     "oauth-ng": "~0.4.2",
-    "restangular": "~1.5.1"
+    "restangular": "~1.5.1",
+    "angular-clipboard": "~1.2.1",
+    "angular-ui-notification": "~0.1.0"
   },
   "repository": {
     "type": "git",
