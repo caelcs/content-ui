@@ -27,6 +27,11 @@
             updateContent: function(publisherUUID, contentUUID, content) {
                 console.log('Update Content by UUID');
                 return Restangular.one('publishers', publisherUUID).one('contents', contentUUID).customPOST(content);
+            },
+
+            getReadContent: function(publisherUUID) {
+                console.log('Getting REST read content');
+                return Restangular.one('publishers', publisherUUID).all('contents').getList({'contentStatus': 'READ', 'page':'0', 'size':'10', 'sort':'content,asc'});
             }
 
         };

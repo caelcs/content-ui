@@ -1,1 +1,14 @@
-<h3>History </h3>
+<section id="history-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Content already read</h2>
+            </div>
+        </div>
+        <div class="row" data-ng-controller="HistoryController" data-ng-init="checkReadContent()">
+            <div class="col-lg-12" data-ng-repeat="content in contents">
+                <label class="form-control" for="content">{{content.content}}</label>
+            </div>
+        </div>
+    </div>
+</section>

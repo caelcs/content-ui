@@ -4,7 +4,8 @@
      * Route configuration for the CopyshareContent module.
      */
     angular
-        .module('CopyshareContent.dashboard.history', [])
+        .module('CopyshareContent.dashboard.history', [
+            'CopyshareContent.dashboard.history.controller'])
         .config(
             [
                 '$stateProvider',
