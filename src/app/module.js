@@ -38,9 +38,20 @@
             if (!AccessToken.get()) {
                 AccessToken.set();
             }
+
             if (isSecure && !AccessToken.get()){
                 event.preventDefault(); 
                 $state.go('public.intro');
+            }
+
+            if (isSecure && AccessToken.get()) {
+                var current = new Date().valueOf();
+                var tokenDate = new Date(AccessToken.get().expires_at).valueOf();
+                if (current > tokenDate) {
+                    console.log('No longer valid. Token Expired');
+                    event.preventDefault();
+                    $state.go('public.intro');
+                };
             }
         });
     };
