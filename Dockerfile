@@ -13,6 +13,6 @@ RUN bower install
 
 EXPOSE 8888
 
-CMD gulp startLive
+ENTRYPOINT [ "gulp startLive" ]
 
 
