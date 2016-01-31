@@ -217,10 +217,10 @@ gulp.task('default', function(callback) {
               callback);
 });
 
-gulp.task('start', function(callback) {
-  runSequence('webserver',
+gulp.task('startLive', function(callback) {
+  runSequence('build',
+              'webserver',
               'livereload',
-              'watchResources',
               callback);
 });
 
