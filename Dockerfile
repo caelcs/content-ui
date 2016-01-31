@@ -1,6 +1,7 @@
 FROM node:latest
 MAINTAINER Adolfo Custidiano <adolfoecs@gmail.com>
 
+RUN npm install -g gulp
 RUN npm install -g bower
 
 WORKDIR /var/www/
@@ -13,6 +14,6 @@ RUN bower install
 
 EXPOSE 8888
 
-ENTRYPOINT [ "gulp startLive" ]
+ENTRYPOINT [ "gulp"]
 
 
