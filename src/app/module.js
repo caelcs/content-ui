@@ -11,6 +11,7 @@
 				'restangular',
                 'angular-clipboard',
                 'ui-notification',
+                'CopyshareContent.constants',
                 'CopyshareContent.common.api',
 				'CopyshareContent.public',
 				'CopyshareContent.dashboard',
@@ -56,9 +57,9 @@
         });
     };
 
-    function cpConfigOAuthProvider(OAuthConfigurationProvider, $httpProvider) {
+    function cpConfigOAuthProvider(OAuthConfigurationProvider, $httpProvider, apiUrl) {
         OAuthConfigurationProvider.init({
-            protectedResources: ['http://localhost:8080']
+            protectedResources: [apiUrl]
         }, $httpProvider);
     };
 

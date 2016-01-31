@@ -12,13 +12,22 @@ var gulp = require('gulp'),
     runSequence = require('run-sequence'),
     del = require('del'),
     html2Js = require('gulp-ng-html2js'),
+    argv = require('yargs').argv,
+    fs = require('fs'),
+    replace = require('gulp-replace-task'),
     protractor = require("gulp-protractor").protractor;
+
 
 var paths = {
     app_scripts: [
+        'src/app/constants.js',
         'src/app/**/*module.js',
         'src/app/components/**/*.js',
         '!src/app/**/*.spec.js'
+    ],
+    build_app_scripts: [
+        'build/app/app.min.js',
+        'build/app/templates.min.js'
     ],
     app_less: 'src/assets/less/**/*.*',
     app_images: 'src/assets/img/**/*.*',
@@ -57,7 +66,7 @@ gulp.task('build', function(callback) {
   runSequence('clean', 
             [
                 'build-css', 
-                'build-templates', 
+                'build-templates',
                 'build-app', 
                 'build-index', 
                 'build-libs-css', 
@@ -73,13 +82,14 @@ gulp.task('buildDev', function(callback) {
   runSequence('clean', 
             [
                 'build-css', 
-                'build-templates-dev', 
+                'build-templates-dev',
                 'build-app', 
                 'build-index', 
                 'build-libs-css', 
                 'build-libs-js', 
                 'build-images', 
-                'build-libs-font'
+                'build-libs-font',
+                'replace-constants'
             ],
             callback);
 });
@@ -204,6 +214,35 @@ gulp.task('default', function(callback) {
               'livereload',
               'watchResources',
               callback);
+});
+
+gulp.task('start', function(callback) {
+  runSequence('webserver',
+              'livereload',
+              'watchResources',
+              callback);
+});
+
+gulp.task('replace-constants', function () {  
+    // Get the environment from the command line
+    var envFile = argv.env || './config/localdev.json';
+    // Read the settings from the right file
+    var settings = JSON.parse(fs.readFileSync(envFile, 'utf8'));
+
+    //Replace each placeholder with the correct value for the variable.  
+    gulp.src(paths.build_app_scripts)  
+        .pipe(replace({
+            patterns: [
+                {
+                    match: 'apiUrl',
+                    replacement: settings.apiUrl
+                },
+                {
+                    match: 'oauthUrl',
+                    replacement: settings.oauthUrl
+                }]
+            }))
+        .pipe(gulp.dest('build/app'));
 });
 
 gulp.task('unit', function (done) {
