@@ -72,7 +72,8 @@ gulp.task('build', function(callback) {
                 'build-libs-css', 
                 'build-libs-js', 
                 'build-images', 
-                'build-libs-font'
+                'build-libs-font',
+                'replace-constants'
             ],
             'minify',
             callback);
