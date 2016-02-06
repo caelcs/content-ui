@@ -72,9 +72,9 @@ gulp.task('build', function(callback) {
                 'build-libs-css', 
                 'build-libs-js', 
                 'build-images', 
-                'build-libs-font',
-                'replace-constants'
+                'build-libs-font'
             ],
+            'replace-constants',
             'minify',
             callback);
 });
@@ -89,9 +89,9 @@ gulp.task('buildDev', function(callback) {
                 'build-libs-css', 
                 'build-libs-js', 
                 'build-images', 
-                'build-libs-font',
-                'replace-constants'
+                'build-libs-font'
             ],
+            'replace-constants',
             callback);
 });
 
@@ -240,6 +240,10 @@ gulp.task('replace-constants', function () {
                 {
                     match: 'oauthUrl',
                     replacement: settings.oauthUrl
+                },
+                {
+                    match: 'uiUrl',
+                    replacement: settings.uiUrl
                 }]
             }))
         .pipe(gulp.dest('build/app'));
