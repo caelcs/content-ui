@@ -198,7 +198,7 @@ gulp.task('watchResources', function() {
 gulp.task('webserver', function() {
     connect.server({
         root: 'build',
-        livereload: true,
+        host: '0.0.0.0',
         port: 8888,
         fallback: 'build/index.html'
     });
@@ -218,9 +218,8 @@ gulp.task('default', function(callback) {
 });
 
 gulp.task('startLive', function(callback) {
-  runSequence('build',
+  runSequence('buildDev',
               'webserver',
-              'livereload',
               callback);
 });
 
