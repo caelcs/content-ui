@@ -244,6 +244,10 @@ gulp.task('replace-constants', function () {
                 {
                     match: 'uiUrl',
                     replacement: settings.uiUrl
+                },
+                {
+                    match: 'clientId',
+                    replacement: settings.clientId
                 }]
             }))
         .pipe(gulp.dest('build/app'));
