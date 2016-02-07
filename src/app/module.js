@@ -25,6 +25,7 @@
         .config([
             'OAuthConfigurationProvider', 
             '$httpProvider',
+            'apiUrl',
             cpConfigOAuthProvider
         ])
         .config([
@@ -59,7 +60,7 @@
 
     function cpConfigOAuthProvider(OAuthConfigurationProvider, $httpProvider, apiUrl) {
         OAuthConfigurationProvider.init({
-            protectedResources: [apiUrl]
+            protectedResources: [apiUrl + '/contentapi']
         }, $httpProvider);
     };
 

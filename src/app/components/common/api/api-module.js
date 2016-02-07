@@ -7,10 +7,11 @@
         .config([
             'RestangularProvider', 
             '$httpProvider',
+            'apiUrl',
             cpConfigCommonApi]);
 
-    function cpConfigCommonApi(RestangularProvider, $httpProvider) {
-        RestangularProvider.setBaseUrl('http://localhost:8080/contentapi');
+    function cpConfigCommonApi(RestangularProvider, $httpProvider, apiUrl) {
+        RestangularProvider.setBaseUrl(apiUrl + '/contentapi');
         RestangularProvider.setDefaultHeaders({
             'Content-Type': 'application/json'
         });
