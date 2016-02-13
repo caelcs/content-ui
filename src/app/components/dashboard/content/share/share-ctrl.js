@@ -5,9 +5,9 @@
      */
     angular
         .module('CopyshareContent.dashboard.share.controller', [])
-        .controller('ShareController', ['$scope', '$location', 'PublisherApi', 'ContentApi', ShareController]);
+        .controller('ShareController', ['$scope', '$location', 'PublisherApi', 'ContentApi', 'Notification', ShareController]);
 
-    function ShareController ($scope, $location, PublisherApi, ContentApi) {
+    function ShareController ($scope, $location, PublisherApi, ContentApi, Notification) {
         $scope.current;
         
         $scope.content = {content :""};
@@ -20,16 +20,12 @@
                 console.log('Creating Content')
                 ContentApi.createContent($scope.current.publisherUUID, $scope.content).then(function(result) {
                     if (result.status === 201) {
-                        console.log('Redirecting to another');
-                        $location.path('/dashboard/content/another');
+                        console.log('content shared');
+                        Notification.success({message: 'Shared!', delay: 1000});
+                        $scope.content = {content :""};
                     };
                 });
             });
-        };
-
-        $scope.redirectToShare = function() {
-            console.log('Redirect to Share page');
-            $location.path('/dashboard/content/share');
         };
     };
 

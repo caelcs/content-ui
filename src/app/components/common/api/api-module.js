@@ -21,8 +21,12 @@
             // .. to look for getList operations
             if (operation === "getList") {
                 // .. and handle the data and meta data
-                extractedData = data._embedded.contentResources;
-                extractedData.meta = data.page;
+                if (data._embedded != undefined) {
+                    extractedData = data._embedded.contentResources;
+                    extractedData.meta = data.page;    
+                } else {
+                    extractedData = [];
+                }
             } else {
                 extractedData = data;
             }
